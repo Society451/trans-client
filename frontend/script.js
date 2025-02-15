@@ -1,3 +1,19 @@
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('backend/data/availLang.json')
+        .then(response => response.json())
+        .then(data => {
+            const srcLangSelect = document.getElementById('src-lang');
+            const destLangSelect = document.getElementById('dest-lang');
+            data.languages.forEach(lang => {
+                const option = document.createElement('option');
+                option.value = lang.code;
+                option.textContent = lang.name;
+                srcLangSelect.appendChild(option.cloneNode(true));
+                destLangSelect.appendChild(option);
+            });
+        });
+});
+
 const form = document.getElementById('translate-form');
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
